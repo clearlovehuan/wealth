@@ -1,25 +1,48 @@
 import loadable from "@loadable/component"
 
-import { Dashboard } from '@/components'
+import {
+	DribbbleSquareOutlined
+} from '@ant-design/icons'
 
+const ArticleList = loadable(()=>import('./article/ArticleList'))
+const ArticleInfo = loadable(()=>import('./article/ArticleInfo'))
 
-const TestRedux = loadable(()=>import('./study'))
-const TestReduxWithHook = loadable(()=>import('./study/TestReduxWithHook'))
+const NotFound = loadable(()=>import('./user/NotFound'))
 
+// 无权限的路由
+export const constRoutes = [
+	{
+		id: 1101,
+		text: '404',
+		hidden: true,
+		path: '/404',
+		component: NotFound
+	}
+]
+
+// 有权限的路由
 export default [
 	{
-		id: 0,
-		path: '/dashboard',
-		component: Dashboard
-	},
-	{
-		id: 1,
-		path: '/redux',
-		component: TestRedux
-	},
-	{
-		id: 2,
-		path: '/redux/hook',
-		component: TestReduxWithHook
+		id: 10,
+		text: '文章管理',
+		icon: <DribbbleSquareOutlined />,
+		permission: ['admin', 'shop'],
+		children: [
+			{
+				id: 1001,
+				text:'文章列表',
+				path: '/article/list',
+				component: ArticleList,
+				permission: ['shop']
+			},
+			{
+				id: 1002,
+				text:'文章详情',
+				hidden: true,
+				path: '/article/info',
+				component: ArticleInfo,
+				permission: ['admin']
+			}
+		]
 	}
 ]

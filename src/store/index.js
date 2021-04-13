@@ -18,12 +18,14 @@ import logger from 'redux-logger'
 import study from './reducers/study'
 import count from './reducers/count'
 import music from './reducers/music'
+import user from './reducers/user'
 
 // createStore语法：createStore(reducer, {}, middlewares)
 const rootReducer = combineReducers({
 	study,
 	count,
-	music
+	music,
+	user
 })
 
 const store = createStore(

@@ -1,7 +1,13 @@
-import Dashboard from './Dashboard'
-import Layout from './common/Layout'
+import Dashboard from './common/Dashboard'
+import Login from './common/Login'
+import AuthorLayout from './AuthorLayout'
+
+// 公共的业务组件
+import ArticleCateSelect from './article/ArticleCateSelect'
 
 export {
 	Dashboard,
-	Layout
+	Login,
+	AuthorLayout,
+	ArticleCateSelect
 }

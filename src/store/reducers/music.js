@@ -5,7 +5,6 @@ let initState = {
 }
 
 export default (state=initState, action) => {
-	console.log('music action', action)
 	// let newState = {...state}
 	let newState = JSON.parse(JSON.stringify(state))
 	switch (action.type) {

@@ -1,20 +1,30 @@
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
+import { AuthorLayout } from '@/components'
 import { Provider } from 'react-redux'
 import store from '@/store'
 
-import { Layout } from '@/components'
-
-
-
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Provider store={store}>
-        <Layout />
+        <AuthorLayout />
       </Provider>
-    </BrowserRouter>
-
-  );
+    </HashRouter>
+  )
 }
 
 export default App
+
+
+
+// <Switch>
+// {
+//   routes.map(ele=>(
+//     <Route
+//       key={ele.id}
+//       path={ele.path}
+//       component={ele.component}
+//     />
+//   ))
+// }
+// </Switch>
