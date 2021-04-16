@@ -19,17 +19,20 @@ import study from './reducers/study'
 import count from './reducers/count'
 import music from './reducers/music'
 import user from './reducers/user'
+import article from './reducers/article'
 
 // createStore语法：createStore(reducer, {}, middlewares)
 const rootReducer = combineReducers({
 	study,
 	count,
 	music,
-	user
+	user,
+	article
 })
 
 const store = createStore(
 	rootReducer,
-	compose(applyMiddleware(logger), applyMiddleware(thunk))
+	applyMiddleware(thunk)
+	// compose(applyMiddleware(logger), applyMiddleware(thunk))
 )
 export default store

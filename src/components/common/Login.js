@@ -3,6 +3,9 @@ import { useHistory } from 'react-router-dom'
 import { Form, Input, Button, Checkbox } from 'antd'
 import './style.scss'
 
+import { useDispatch, useSelector } from 'react-redux'
+import { loginSubmit } from '@/store/actions'
+
 const layout = {
   labelCol: {
     span: 4,
@@ -34,16 +37,18 @@ const styles = {
 export default props=>{
 
 	const history = useHistory()
+  const dispatch = useDispatch()
+  const token = useSelector(store=>store.user.token)
 
 	const login = (values) => {
-		// axios
-		localStorage.setItem('token', values.username)
-		// // props.onLogin(true)
-		setTimeout(()=>{
-			history.replace('/dash')
-		}, 1000)
 		console.log('values', values)
+    dispatch(loginSubmit(values))
 	}
+  // 当redux中的token进来时，这个副作用将再次执行
+  useEffect(()=>{
+    if(token) history.replace('/dash')
+    return undefined
+  })
 
 	return (
 		<div className='qf-login'>

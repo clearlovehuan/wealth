@@ -7,44 +7,29 @@ import { Route, Redirect, Switch } from 'react-router-dom'
 // constRoutes没有权限的路由
 import authorRoutes, { constRoutes } from '@/pages'
 
-// const NoMatch = ()=>{
-// 	return <Redirect to='/dash/404' />
-// }
-
-
-
-const AuthorRoute = ({noMatch, permission, ...rest}) => {
-	const userinfo = useSelector(store=>store.user.userinfo)
-	return (
-		permission.includes(userinfo.role)
-		? <Route {...rest} />
-		: <Route {...rest} render={()=>noMatch} />
-	)
-}
-
-// <Route
-// 	key={ele.id}
-// 	path={'/dash'+ele.path}
-// 	component={ele.permission.includes(userinfo.role)?ele.component:NoMatch}
-// />
-
 export default ()=>{
 
-	// const userinfo = useSelector(store=>store.user.userinfo)
+	const userinfo = useSelector(store=>store.user.userinfo)
+
+	const NoMatch = ()=>{
+		return <Redirect to='/dash/404' />
+	}
 
 	// 生成“有权限的路由规则”
+	// 当role是空，说明getUserInfo这个接口还没有完成
+	// 一定要确保有role时，才执行权限功能代码
 	const renderAuthorRoutes = ()=> {
 		const res = []
+		const role = userinfo.role
+		const dash = authorRoutes[0]
 		const recursion = arr => {
 			arr.map(ele=>{
 				res.push(
-					<AuthorRoute
+					<Route
 						key={ele.id}
-						noMatch={<Redirect to='/dash/404' />}
 						path={'/dash'+ele.path}
-						permission={ele.permission||[]}
-						component={ele.component}
 						exact
+						component={ele.permission.includes(role)?ele.component:NoMatch}
 					/>
 				)
 				ele.children && recursion(ele.children)
@@ -53,10 +38,19 @@ export default ()=>{
 		authorRoutes.map(ele=>(
 			ele.children && recursion(ele.children)
 		))
+		res.push(
+			<Route
+				key={dash.id}
+				path={'/dash'+dash.path}
+				exact
+				component={dash.component}
+			/>
+		)
 		return res
 	}
 
 	// 生成“没有权限”的路由规则
+	// 这一套路由规则和role没有关系
 	const renderConstRoutes = ()=> {
 		return constRoutes.map(ele=>(
 			<Route
@@ -71,9 +65,9 @@ export default ()=>{
 	return(
 		<div className='qf-content'>
 			<Switch>
-				{renderAuthorRoutes()}
-				{renderConstRoutes()}
-				<Redirect from='/dash/*' to='/dash/article/list' />
+				{ userinfo.role && renderAuthorRoutes() }
+				{ renderConstRoutes() }
+				{/*<Redirect from='/dash/*' to='/dash/article/list' />*/}
 			</Switch>
 		</div>
 	)

@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { getInfo } from '@/store/actions'
 
 import { Layout } from 'antd'
 import './style.scss'
@@ -9,8 +11,13 @@ import QfContent from './QfContent'
 import QfHeader from './QfHeader'
 const { Header, Sider, Content } = Layout
 
-export default ()=> {
+export default props => {
 	const [ collapse, setCollapse ] = useState(false)
+	const dispatch = useDispatch()
+	useEffect(()=>{
+		dispatch(getInfo({}))
+		return undefined
+	}, [])
 	return(
 		<div className='qf-layout'>
 			<Layout>
@@ -21,7 +28,7 @@ export default ()=> {
 
 				<Layout>
 					<Header>
-						<QfHeader />
+						<QfHeader {...props} />
 					</Header>
 					<Content>
 						<QfContent />

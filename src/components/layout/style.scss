@@ -17,6 +17,18 @@ html, body {
 	.ant-layout {
 		height: 100%;
 	}
+	.qf-header {
+		color: white;
+		.lang {
+			&>div {
+				width: 80px;
+				background-color: white;
+				line-height: 40px;
+				color: black;
+				cursor: pointer;
+			}
+		}
+	}
 	.qf-aside {
 		position: absolute;
 		bottom: 0;
@@ -41,10 +53,10 @@ html, body {
 		position: relative;
 		.qf-content {
 			position: absolute;
-			top: 15px;
-			left: 15px;
-			bottom: 15px;
-			right: 15px;
+			top: 5px;
+			left: 5px;
+			bottom: 5px;
+			right: 5px;
 			overflow: auto;
 			background-color: rgba(239, 242, 245, 1);
 			padding: 10px;

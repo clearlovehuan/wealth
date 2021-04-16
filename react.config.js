@@ -31,6 +31,10 @@ module.exports = {
 		'/soso': {
 			target: 'https://c.y.qq.com',
 			changeOrigin: true
+		},
+		'/api': {
+			target: 'http://localhost:8888',
+			changeOrigin: true
 		}
 	}
 }

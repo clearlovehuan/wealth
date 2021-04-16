@@ -16,14 +16,25 @@ export default props=>{
 	const [current, setCurrent] = useState(1)
 	const userinfo = useSelector(store=>store.user.userinfo)
 
-	// let { collapse, onToggle } = props
 	// 作用：生成声明式链接
 	const renderNavLinks = ()=> {
 
 		const res = []
+		const dash = routes[0]
+		// 渲染仪表盘
+		res.push(
+			<Menu.Item key={dash.id} icon={dash.icon}>
+				<NavLink
+					to={'/dash'+dash.path}
+				>
+					{dash.text}
+				</NavLink>
+			</Menu.Item>
+		)
+		// 再渲染有二级菜单的菜单
 		routes.map(ele=>{
 			// 处理一级菜单的权限管理
-			if(ele.permission.includes(userinfo.role)) {
+			if(!ele.href && ele.permission.includes(userinfo.role)) {
 				res.push(<SubMenu key={ele.id} title={ele.text} icon={ele.icon}>
 					{
 						ele.children && ele.children.map(ele=>(
@@ -53,7 +64,7 @@ export default props=>{
 				mode="inline"
 				theme={'dark'}
 			>
-				{ renderNavLinks() }
+				{ userinfo.role && renderNavLinks() }
 			</Menu>
 
 			<Toggle {...props} />

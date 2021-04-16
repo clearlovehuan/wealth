@@ -2,7 +2,7 @@ import Dashboard from './common/Dashboard'
 import Login from './common/Login'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
-export default ()=>{
+export default props =>{
 	return (
 		<Switch>
 			<Route path='/login' render={()=>{
@@ -11,7 +11,7 @@ export default ()=>{
 			}} />
 			<Route path='/dash' render={()=>{
 				const token = localStorage.getItem('token')
-				return token ? <Dashboard /> : <Redirect to='/login' />
+				return token ? <Dashboard {...props} /> : <Redirect to='/login' />
 			}} />
 		</Switch>
 	)

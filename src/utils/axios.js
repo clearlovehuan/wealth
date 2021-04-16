@@ -1,28 +1,35 @@
 import axios from 'axios'
 
+const baseURL = 'http://localhost:9000'
+const version = '/api/v1'
+
 const instance = axios.create({
-  baseURL: 'http://localhost:9000',
+  baseURL: baseURL+version,
   timeout: 7000,
   headers: {}
 })
 
 instance.interceptors.request.use(function (config) {
-    // Do something before request is sent
-    return config
-  }, function (error) {
-    // Do something with request error
-    return Promise.reject(error)
-  })
+  config.headers['Authorization'] = localStorage.getItem('token')
+  return config
+}, function (error) {
+  return Promise.reject(error)
+})
 
-// Add a response interceptor
 instance.interceptors.response.use(function (response) {
-    // Any status code that lie within the range of 2xx cause this function to trigger
-    // Do something with response data
-    return response.data.data
-  }, function (error) {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
-    return Promise.reject(error)
-  })
+  let res = null
+  if(response && response.data) {
+    if(response.data.err === 0) {
+      res = response.data.data
+    }else if(response.data.err === -1) {
+      window.location.href = '/#/login'
+    }else {
+      console.log('业务逻辑错误')
+    }
+  }
+  return res
+}, function (error) {
+  return Promise.reject(error)
+})
 
-	export default instance
+export default instance
