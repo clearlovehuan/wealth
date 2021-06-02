@@ -5,14 +5,20 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 export default props =>{
 	return (
 		<Switch>
-			<Route path='/login' render={()=>{
+			{/* <Route path='/login' render={()=>{
 				const token = localStorage.getItem('token')
 				return token ? <Redirect to='/dash' /> : <Login />
 			}} />
 			<Route path='/dash' render={()=>{
 				const token = localStorage.getItem('token')
 				return token ? <Dashboard {...props} /> : <Redirect to='/login' />
-			}} />
+			}} /> */}
+			<Route 
+				path='/dash' 
+				render={() => {
+					return <Dashboard { ...props }/>
+				}}
+			/>
 		</Switch>
 	)
 }

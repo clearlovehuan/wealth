@@ -35,7 +35,6 @@ const styles = {
 }
 
 export default props=>{
-
 	const history = useHistory()
   const dispatch = useDispatch()
   const token = useSelector(store=>store.user.token)

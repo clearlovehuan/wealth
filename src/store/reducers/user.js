@@ -14,6 +14,7 @@ export default (state=initState, action) => {
 			break
 		case types.FETCH_USER_INFO:
 			newState.userinfo = action.payload
+			// newState.userinfo = ['admin']
 			console.log('redux userinfo', newState)
 			break;
 		case types.LOGOUT_SUBMIT:

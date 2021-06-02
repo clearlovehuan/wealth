@@ -17,6 +17,10 @@ const ArticleInfo = loadable(()=>import('./article/ArticleInfo'))
 const NotFound = loadable(()=>import('./user/NotFound'))
 const UserManager = loadable(()=>import('./user/UserManager'))
 
+// 出勤模块
+const AttendanceList = loadable(() => ('./attendance/attendanceList.js'))
+const AttendanceInfo = loadable(() => './attendance/attendanceInfo.js')
+
 // 无权限的路由
 export const constRoutes = [
 	{
@@ -73,6 +77,28 @@ export default [
 				text:'成员管理',
 				path: '/user/manager',
 				component: UserManager,
+				permission: ['admin']
+			}
+		]
+	},
+	{
+		id: 12,
+		text: '考勤管理',
+		icon: '',
+		permission: ['admin'],
+		children: [
+			{
+				id: 1201,
+				text:'我的考勤',
+				path: '/attendance/list',
+				component: AttendanceList,
+				permission: ['admin']
+			},
+			{
+				id: 1202,
+				text:'请假加班',
+				path: '/attendance/info',
+				component: AttendanceInfo,
 				permission: ['admin']
 			}
 		]
