@@ -5,7 +5,11 @@ created by xhf 2021-04-09
 
 ['admin','manager','editor']
 
+<<<<<<< HEAD
 
 ## 简单修改一下
 
 ## 再次简单修改一下
+=======
+我远程修改了readme.md文档
+>>>>>>> master
