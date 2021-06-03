@@ -11,8 +11,5 @@ created by xhf 2021-04-09
 ## 再次简单修改一下
 我远程修改了readme.md文档
 
-<<<<<<< HEAD
 ## 这是我在Edison上修改的
-=======
 这是在master上修改的
->>>>>>> master
