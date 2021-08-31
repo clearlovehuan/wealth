@@ -105,6 +105,3 @@ function getClientEnvironment(publicUrl) {
 
 module.exports = getClientEnvironment;
 
-//来吧来吧来跳舞
-//don`t worry bro....
-//这是我在远程仓库上修改的
