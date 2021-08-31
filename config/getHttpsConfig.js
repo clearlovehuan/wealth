@@ -45,6 +45,7 @@ function readEnvFile(file, type) {
 
 // Get the https config
 // Return cert files if provided in env, otherwise just true or false
+//这是我在本地修改的
 function getHttpsConfig() {
   const { SSL_CRT_FILE, SSL_KEY_FILE, HTTPS } = process.env;
   const isHttps = HTTPS === 'true';
